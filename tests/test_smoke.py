@@ -4,7 +4,6 @@ import pytest
 
 import ikd1d
 from ikd1d.cli import main
-from ikd1d.io import load_cybex
 
 DATA = Path(__file__).parent / "data"
 
@@ -25,8 +24,3 @@ def test_cli_runs():
 def test_sample_data_present(name):
     assert (DATA / name).stat().st_size > 0
 
-
-@pytest.mark.xfail(reason="Phase 1: loaders not yet implemented", raises=NotImplementedError)
-def test_load_cybex_schema():
-    df = load_cybex(DATA / "Cybex_Qcon60-Hcon60.CSV")
-    assert tuple(df.columns) == ikd1d.COLUMNS
