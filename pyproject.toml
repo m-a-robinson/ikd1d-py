@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ikd1d"
+version = "0.1.0.dev0"
+description = "Analysis of isokinetic dynamometry torque-angle curves as one-dimensional observations (Python port of the LJMU IKD1D MATLAB app)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "BSD-2-Clause" }  # TODO: confirm; the LICENSE file is GPLv3 but the MATLAB headers say BSD-2-Clause
+dependencies = ["numpy>=1.24", "scipy>=1.10", "pandas>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov", "ruff"]
+plot = ["matplotlib>=3.7"]
+
+[project.scripts]
+ikd1d = "ikd1d.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ikd1d"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "NPY"]
